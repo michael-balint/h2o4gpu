@@ -344,6 +344,7 @@ deps_install:
 	easy_install pip
 	easy_install setuptools
 	cat requirements_buildonly.txt requirements_runtime.txt > requirements.txt
+	pip install -r requirements_h2o.txt --upgrade
 	pip install -r requirements.txt --upgrade
 	rm -rf requirements.txt
 	# issue with their package, have to do this here (still fails sometimes, so remove)
@@ -405,7 +406,7 @@ apply_xgboost-nonccl-cuda9:  pipxgboost-nonccl-cuda9
 pipxgboost:
 	@echo "----- pip install xgboost built locally -----"
 	cd xgboost/python-package/dist && pip install xgboost-0.6-py3-none-any.whl --upgrade --target ../
-	cd xgboost/python-package/xgboost ; cp -a ../lib/libxgboost*.so .
+	cd xgboost/python-package/xgboost
 
 pipxgboost-nccl-cuda8:
 	@echo "----- pip install xgboost-nccl-cuda8 from S3 -----"
@@ -641,4 +642,5 @@ endif
 
 .PHONY: ALWAYS_REBUILD
 .ALWAYS_REBUILD:
+
 
